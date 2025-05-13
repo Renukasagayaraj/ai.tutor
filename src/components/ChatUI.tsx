@@ -1,5 +1,14 @@
-export default function ChatUI({ messages, loading }) {
-  
+export type Message = {
+  sender: 'user' | 'bot'; // or whatever your actual senders are
+  text: string;
+};
+
+type ChatUIProps = {
+  messages: Message[];
+  loading: boolean;
+};
+
+export default function ChatUI({ messages, loading }: ChatUIProps) {
   return (
     <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
       {messages.map((msg, idx) => (

@@ -1,18 +1,19 @@
 import { useChatStore } from "../hooks/store";
 import LoadingSkeleton from "../components/loadingskeleton";
-import { ProductList } from "../components/productsList";
+// import { ProductList } from "../components/productsList";
 import ChatInput from "../components/chatpanel";
-import { Button } from "../components/ui/button";
-import { useCallback, useEffect, useState } from "react";
+// import { Button } from "../components/ui/button";
+import { useCallback, useState } from "react";
 import {
   LoaderFunctionArgs,
-  useLoaderData,
-  useNavigate,
+  // useLoaderData,
+  // useNavigate,
 } from "react-router-dom";
-import { createChat, mockApi } from "@/api/query";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useToast } from "@/components/ui/use-toast";
-import ChatUI from "@/components/ChatUI";
+// import { createChat, mockApi } from "@/api/query";
+import { mockApi } from "@/api/query";
+// import { useMutation, useQueryClient } from "@tanstack/react-query";
+// import { useToast } from "@/components/ui/use-toast";
+import ChatUI, { type Message } from "@/components/ChatUI";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatId } = params;
@@ -23,26 +24,26 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 function Chat() {
-  const { chatId } = useLoaderData() as { chatId: string };
+  // const { chatId } = useLoaderData() as { chatId: string };
 
-  const { loading, setLoading, question, setQuestion, error, setError } =
+  const { loading, setLoading, question, setQuestion } =
     useChatStore();
-  const [messages, setMessages] = useState([
-    { sender: "ai", text: "Hello! How can I assist you today?" }
+  const [messages, setMessages] = useState<Message[]>([
+    { sender: "bot", text: "Hello! How can I assist you today?" }
   ]);
 
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  // const navigate = useNavigate();
+  // const queryClient = useQueryClient();
 
-  const onClick = () => {
-    navigate("/");
-  };
+  // const onClick = () => {
+  //   navigate("/");
+  // };
 
-  const { mutateAsync, isPending } = useMutation({
-    mutationFn: async (sessionId: string) => {
-      await createChat(question, sessionId);
-    },
-  });
+  // const { mutateAsync, isPending } = useMutation({
+  //   mutationFn: async (sessionId: string) => {
+  //     await createChat(question, sessionId);
+  //   },
+  // });
 
   // const handleSubmit = useCallback(
   //   async (e: React.FormEvent<HTMLFormElement>) => {
@@ -79,11 +80,11 @@ function Chat() {
         // Use the description of the first product as the AI's response
         const aiMsg = responseArr[0]?.products?.[0]?.description || "Sorry, I didn't get that.";
                
-        setMessages((msgs) => [...msgs, { sender: "ai", text: aiMsg }]);
+        setMessages((msgs) => [...msgs, { sender: "bot", text: aiMsg }]);
       } catch (err) {
         setMessages((msgs) => [
           ...msgs,
-          { sender: "ai", text: "Sorry, there was an error." }
+          { sender: "bot", text: "Sorry, there was an error." }
         ]);
       } finally {
         setLoading(false);
@@ -92,6 +93,7 @@ function Chat() {
     [question]
   );
 
+  /*
   useEffect(() => {
     if (isPending) {
       setLoading(true);
@@ -106,6 +108,7 @@ function Chat() {
       }, 5000);
     }
   }, [isPending, error]);
+  */
 
   return (
     <div className="px-2 md:px-10 py-10 ">
