@@ -21,7 +21,7 @@ export default function ChatInput({
         <textarea
           name="question"
           id="question"
-          className="rounded-md w-full p-3 bg-gray-100 dark:bg-gray-800 focus:outline-none resize-none border-1 ring-2 ring-gray-400 focus:ring-gray-600 dark:ring-0 dark:focus:ring-2  dark:focus:ring-gray-100 "
+          className=" bg-white rounded-md w-full p-3 focus:outline-none resize-none border-1 ring-2 ring-gray-400 focus:ring-gray-600 dark:ring-0 dark:focus:ring-2  dark:focus:ring-gray-100 text-black"
           placeholder="Ask your question here..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
@@ -37,11 +37,11 @@ export default function ChatInput({
         ></textarea>
         <button
           ref={submitRef}
-          className="absolute right-3 top-2 hover:bg-gray-300 dark:hover:bg-gray-500 p-2 rounded-lg "
+          className="absolute right-3 top-2 hover:bg-gray-300 dark:hover:bg-gray-500 p-2 rounded-lg"
           type="submit"
           aria-label="Submit"
         >
-          <SendHorizonal className="size-5" />
+          <SendHorizonal className="size-5 text-black" /> {/* <-- Add text-black here */}
         </button>
       </div>
     </form>

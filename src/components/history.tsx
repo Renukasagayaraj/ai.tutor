@@ -76,7 +76,7 @@ export default function HistoryPanel() {
             ) : (
               <>
                 {data?.length > 0 ? (
-                  data?.map((item: any) => (
+                  Array.isArray(data)? data?.map((item: any) => (
                     <div
                       key={item?.sessionId}
                       className="flex items-center w-full gap-4"
@@ -97,7 +97,7 @@ export default function HistoryPanel() {
                         </SheetClose>
                       </div>
                     </div>
-                  ))
+                  )): null
                 ) : (
                   <p>No history found.</p>
                 )}

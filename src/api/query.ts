@@ -35,6 +35,15 @@ export const sessionHistory = async (sessionId: string) => {
   }
 };
 
+export const mockApi = async () => {
+  try {
+    const response = await axios.get("https://run.mocky.io/v3/78bd8827-b0bd-44e0-9550-8b6ee1704df7");
+    return typeof response.data === "string" ? JSON.parse(response.data) : response.data;
+  } catch (e) {
+    return e;
+  }
+};
+
 export const login_user = async (
   email: string,
   name: string,

@@ -27,13 +27,13 @@ export function ProductList() {
 
   return (
     <div className="space-y-5">
-      {queryData?.map((response: any, index: any) => (
+      {Array.isArray(queryData) ?queryData?.map((response: any, index: any) => (
         <Accordion
           key={index}
           response={response}
           open={index === queryData.length - 1}
         />
-      ))}
+      )) : null}
     </div>
   );
 }
